@@ -1,0 +1,11 @@
+{
+    "webServer":{
+        "http":{"port":8191}
+    },
+    "timeZone":"America/Santiago",
+    "masterToken":"pomeo.123",
+    "mongoDB":{
+        "url":"mongodb://localhost:27017",
+        "database":"geopminz"
+    }
+}
