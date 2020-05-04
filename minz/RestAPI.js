@@ -178,7 +178,7 @@ class RestAPI {
             try {
                 await security.checkPrivilege(this.getAuth(req), "post");
                 res.setHeader('Content-Type', 'application/json');
-                let row = await dimensions.deleteRow(req.params.dimcode, req.params.rowCode);
+                let row = await dimensions.deleteRow(req.params.dimCode, req.params.rowCode);
                 res.send(JSON.stringify(row));
             } catch(error) {
                 if (typeof error == "string") {
@@ -193,7 +193,7 @@ class RestAPI {
             try {
                 await security.checkPrivilege(this.getAuth(req), "query");
                 res.setHeader('Content-Type', 'application/json');
-                let row = await dimensions.getRow(req.params.dimcode, req.params.rowCode);
+                let row = await dimensions.getRow(req.params.dimCode, req.params.rowCode);
                 res.send(JSON.stringify(row));
             } catch(error) {
                 if (typeof error == "string") {

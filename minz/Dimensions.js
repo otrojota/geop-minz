@@ -29,6 +29,7 @@ class Dimensions {
                 if (!r.classifiers) r.classifiers = [];
                 this.dimensions[r.code] = r;            
             });
+            //console.log("Dimensions", this.dimensions);
         } catch(error) {
             throw error;
         }
@@ -41,13 +42,6 @@ class Dimensions {
     }
     getDimension(dimensionCode) {
         return this.dimensions[dimensionCode];
-    }
-    async getRow(dimensionCode, code) {
-        try {
-            return await db.collection(dimensionCode).findOne({_id:code});
-        } catch(error) {
-            throw error;
-        }
     }
     async addDimension(dimension) {
         try {
