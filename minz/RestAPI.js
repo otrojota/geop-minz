@@ -123,8 +123,8 @@ class RestAPI {
             }
         });
         app.post("/dim", async (req, res) => {
-            await security.checkPrivilege(this.getAuth(req), "admin");
             try {
+                await security.checkPrivilege(this.getAuth(req), "admin");
                 res.setHeader('Content-Type', 'application/json');
                 let d = await dimensions.addOrSaveDimension(req.body);
                 res.send(JSON.stringify(d));
