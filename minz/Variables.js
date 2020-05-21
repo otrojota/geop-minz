@@ -140,7 +140,7 @@ class Variables {
                 await (await mongo.collection(variable.code)).deleteMany({});
             }
             await (await mongo.collection("z_variables")).updateOne({_id:variable.code}, {
-                $set:{name:variable.name, temporality:variable.temporality, saveDetails:variable.saveDetails}
+                $set:{name:variable.name, temporality:variable.temporality, saveDetails:variable.saveDetails, options:variable.options}
             });
             await this.loadVariables();
         } catch(error) {

@@ -280,7 +280,12 @@ class RestAPI {
             try {
                 await security.checkPrivilege(this.getAuth(req), "admin");
                 res.setHeader('Content-Type', 'application/json');
-                let d = await variables.addVariable(req.body);
+                let d = await variables.getVariable(req.body.code);
+                if (d) {
+                    await variables.saveVariable(req.body);
+                } else {
+                    d = await variables.addVariable(req.body);
+                }
                 res.send(JSON.stringify(d));
             } catch(error) {
                 if (typeof error == "string") {
@@ -408,6 +413,7 @@ class RestAPI {
                 if (!startTime || !endTime) throw "Must provide startTime and endTime";
                 if (typeof startTime == "string") startTime = moment.tz(startTime, config.timeZone).valueOf();
                 if (typeof endTime == "string") endTime = moment.tz(endTime, config.timeZone).valueOf();
+
                 let filter = req.query.filter || "{}";
                 filter = JSON.parse(filter);
                 let groupDimension = req.query.groupDimension;
