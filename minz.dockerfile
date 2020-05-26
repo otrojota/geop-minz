@@ -1,5 +1,5 @@
-# docker build -f minz.dockerfile -t otrojota/geoportal:minz-0.11 .
-# docker push otrojota/geoportal:minz-0.11
+# docker build -f minz.dockerfile -t otrojota/geoportal:minz-0.13 .
+# docker push otrojota/geoportal:minz-0.13
 #
 FROM otrojota/geoportal:gdal-nodejs
 WORKDIR /opt/geoportal/geop-servimet

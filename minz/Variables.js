@@ -559,6 +559,7 @@ class Variables {
             let promises = [];
             Object.values(grupos).forEach(g => promises.push(this.postGrupoBatch(g, options)));
             await Promise.all(promises);
+            return {};
         } catch(error) {
             console.log(error);
             throw "Error processing batch:" + error.toString();            

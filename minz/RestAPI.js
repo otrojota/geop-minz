@@ -228,6 +228,12 @@ class RestAPI {
                 }
                 let includeNames = req.query.includeNames;
                 includeNames = includeNames && includeNames.toLowerCase() == "true";
+                let count = req.query.count;
+                if (count && count == "true") {
+                    let n = await dimensions.getRowsCount(req.params.dimCode, textFilter, filter);
+                    res.status(200).send(JSON.stringify({n:n})).end();
+                    return;
+                }
                 let rows;
                 if (includeNames) {
                     rows = await dimensions.getRowsWithClassifiersNames(req.params.dimCode, textFilter, filter, startRow, nRows);
@@ -341,6 +347,21 @@ class RestAPI {
                 await security.checkPrivilege(this.getAuth(req), "post");
                 res.setHeader('Content-Type', 'application/json');
                 let d = await variables.postData(req.params.code, req.body.time, req.body.value, req.body.data, req.body.options);
+                res.send(JSON.stringify(d));
+            } catch(error) {
+                if (typeof error == "string") {
+                    res.status(400).send(error.toString())
+                } else {
+                    console.log(error);
+                    res.status(500).send("Internal Error")
+                }
+            }
+        })
+        app.post("/batch", async (req, res) => {
+            try {
+                await security.checkPrivilege(this.getAuth(req), "post");
+                res.setHeader('Content-Type', 'application/json');
+                let d = await variables.postDataBatch(req.body.batch, req.body.options);
                 res.send(JSON.stringify(d));
             } catch(error) {
                 if (typeof error == "string") {

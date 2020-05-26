@@ -367,7 +367,7 @@ class Dimensions {
     async getRows(dimensionCode, textFilter, filter, startRow, nRows) {
         let pipe = this.getRowsFilterPipeline(dimensionCode, textFilter, filter);
         pipe.push({$sort:{order:1}});
-        if (startRow && nRows) {
+        if (startRow !== undefined && nRows !== undefined) {
             pipe.push({$skip:startRow});
             pipe.push({$limit:nRows});
         }
