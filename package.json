@@ -24,7 +24,7 @@
   "homepage": "https://github.com/otrojota/geop-minz#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "moment-timezone": "^0.5.28",
+    "moment-timezone": "^0.5.35",
     "mongodb": "^3.5.5"
   }
 }
